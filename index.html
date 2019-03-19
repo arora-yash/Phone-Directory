@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Phone Directory</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</head>
+<body onload="dis()">
+
+<div id="index">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="#">Phone Directory</a>
+</nav>
+<br/>
+
+<br><br>
+<p></p>
+</div>
+</div>
+
+  <div id ="formdata" class="container" display = "none">
+  <button onclick="myFunction()" class = "btn btn-success">Add</button>
+  <br><br>
+	<form name="form" onsubmit="return addData()">
+ <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" class="form-control" id="name" oninput="ShowText()">
+  </div>
+  <div class="form-group">
+    <label for="phone">Phone:</label>
+    <input type="text" class="form-control" id="phone" oninput="ShowText()">
+  </div>
+  <input type="button" class="add-row btn btn-success" value="Add Row">
+</form>
+<br><br>
+
+<div class="jumbotron">
+      <h3>Subscriber to add:</h3>
+	  <p id="sname"></p>
+		<p id="sphone"></p>
+    </div>
+</div>
+
+<div id ="data" class = "container">
+
+<button class = "btn btn-success" onclick="myFunction()">Add</button>
+<br><br><br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Name</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" class="delete-row btn btn-danger">Delete Row</button>
+<br><br>
+
+
+<script>
+
+$(document).ready(function(){
+        $(".add-row").click(function(){
+            var name = $("#name").val();
+            var email = $("#phone").val();
+            var markup = "<tr><td><input type='checkbox' name='record'></td><td>" + name + "</td><td>" + email + "</td></tr>";
+            $("table tbody").append(markup);
+			dis();
+        });
+
+        // Find and remove selected table rows
+        $(".delete-row").click(function(){
+            $("table tbody").find('input[name="record"]').each(function(){
+            	if($(this).is(":checked")){
+                    $(this).parents("tr").remove();
+                }
+            });
+        });
+
+    });
+
+function myFunction() {
+  var x = document.getElementById("data");
+  var y = document.getElementById("formdata");
+    x.style.display = "none";
+	y.style.display = "block";
+
+}
+
+function dis() {
+	var x = document.getElementById("data");
+	var y = document.getElementById("formdata");
+	x.style.display = "block";
+	y.style.display = "none";
+}
+
+function ShowText() {
+  var x = document.getElementById("name").value;
+  var y = document.getElementById("phone").value;
+  document.getElementById("sname").innerHTML = "Name: " + x;
+  document.getElementById("sphone").innerHTML = "Phone: " + y;
+}
+</script>
+</body>
+</html>
